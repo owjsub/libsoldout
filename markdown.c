@@ -1146,9 +1146,11 @@ parse_listitem(struct buf *ob, struct render *rndr,
 				*flags |= MKD_LI_END;
 				break; }
 		else if (in_empty) {
-			bufputc(work, '\n');
 			has_inside_empty = 1; }
 		in_empty = 0;
+		
+		if (has_inside_empty)
+			bufputc(work, '\n');
 
 		/* adding the line without prefix into the working buffer */
 		bufput(work, data + beg + i, end - beg - i);
